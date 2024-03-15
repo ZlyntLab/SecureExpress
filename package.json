@@ -1,0 +1,41 @@
+{
+  "name": "typescript-package-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
+    "clear": "rimraf ./lib || true && rimraf ./docs || true ",
+    "test": "jest --config jestconfig.json",
+    "prepare": "npm run clear && npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "perversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags",
+    "clear:docs": "rimraf ./docs || true",
+    "build:docs": "npm run clear:docs && npx typedoc --plugin typedoc-plugin-markdown --plugin typedoc-github-wiki-theme ./src/index.ts"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "keywords": [],
+  "author": "Ivan Teixeira",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5",
+    "rimraf": "^5.0.5",
+    "ts-jest": "^29.1.2",
+    "typedoc": "^0.25.12",
+    "typedoc-github-wiki-theme": "^1.1.0",
+    "typedoc-plugin-markdown": "^3.17.1",
+    "typescript": "^5.4.2"
+  }
+}
